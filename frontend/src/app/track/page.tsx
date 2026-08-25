@@ -39,13 +39,13 @@ export default function TrackReport() {
       </div>
 
       {/* Header */}
-      <header style={{ background: "#1B3A6B", color: "white", padding: "12px 24px", display: "flex", alignItems: "center", gap: 16, borderBottom: "3px solid #F97316" }}>
+      <header style={{ background: "#1B3A6B", color: "white", padding: "12px 24px", display: "flex", alignItems: "center", gap: 16, borderBottom: "3px solid #0D9488" }}>
         <button onClick={() => router.back()} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "white", cursor: "pointer", borderRadius: 4, padding: "6px 10px", display: "flex", alignItems: "center", gap: 4, fontSize: 13 }}>
           <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_back</span>
           Back
         </button>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 32, height: 32, background: "#F97316", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 32, height: 32, background: "#0D9488", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <span className="material-symbols-outlined" style={{ fontSize: 18, color: "white" }}>shield</span>
           </div>
           <div>

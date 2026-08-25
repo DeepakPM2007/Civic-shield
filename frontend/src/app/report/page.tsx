@@ -15,7 +15,7 @@ function GovHeader({ back }: { back?: boolean }) {
         <span>Government of Tamil Nadu — CivicShield AI</span>
         <span>Helpline: 1800-XXX-XXXX</span>
       </div>
-      <header style={{ background: "#1B3A6B", color: "white", padding: "12px 24px", display: "flex", alignItems: "center", gap: 16, borderBottom: "3px solid #F97316" }}>
+      <header style={{ background: "#1B3A6B", color: "white", padding: "12px 24px", display: "flex", alignItems: "center", gap: 16, borderBottom: "3px solid #0D9488" }}>
         {back && (
           <button onClick={() => router.push('/')} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "white", cursor: "pointer", borderRadius: 4, padding: "6px 10px", display: "flex", alignItems: "center", gap: 4, fontSize: 13 }}>
             <span className="material-symbols-outlined" style={{ fontSize: 16 }}>arrow_back</span>
@@ -23,7 +23,7 @@ function GovHeader({ back }: { back?: boolean }) {
           </button>
         )}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 32, height: 32, background: "#F97316", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: 32, height: 32, background: "#0D9488", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <span className="material-symbols-outlined" style={{ fontSize: 18, color: "white" }}>shield</span>
           </div>
           <div>
@@ -248,7 +248,7 @@ export default function ReportIssue() {
                 <span className="material-symbols-outlined" style={{ fontSize: 18 }}>search</span>
                 Track My Complaint
               </Link>
-              <button onClick={() => router.push('/dashboard')} style={{ flex: 1, background: "#F97316", color: "white", border: "none", padding: "12px 0", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+              <button onClick={() => router.push('/dashboard')} style={{ flex: 1, background: "#0D9488", color: "white", border: "none", padding: "12px 0", borderRadius: 4, fontWeight: 700, fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
                 <span className="material-symbols-outlined" style={{ fontSize: 18 }}>dashboard</span>
                 View Dashboard
               </button>
@@ -260,7 +260,7 @@ export default function ReportIssue() {
 
             {/* Section 1: Photo */}
             <div className="gov-card" style={{ padding: 24, marginBottom: 20 }}>
-              <div style={{ borderLeft: "4px solid #F97316", paddingLeft: 12, marginBottom: 16 }}>
+              <div style={{ borderLeft: "4px solid #0D9488", paddingLeft: 12, marginBottom: 16 }}>
                 <div style={{ fontWeight: 700, fontSize: 15, color: "#1B3A6B" }}>1. Visual Evidence (Photo)</div>
                 <div style={{ fontSize: 12, color: "#64748B", marginTop: 2 }}>Upload a clear photo of the civic issue</div>
               </div>
@@ -296,7 +296,7 @@ export default function ReportIssue() {
 
             {/* Section 2: Description */}
             <div className="gov-card" style={{ padding: 24, marginBottom: 24 }}>
-              <div style={{ borderLeft: "4px solid #F97316", paddingLeft: 12, marginBottom: 16 }}>
+              <div style={{ borderLeft: "4px solid #0D9488", paddingLeft: 12, marginBottom: 16 }}>
                 <div style={{ fontWeight: 700, fontSize: 15, color: "#1B3A6B" }}>2. Issue Description</div>
                 <div style={{ fontSize: 12, color: "#64748B", marginTop: 2 }}>AI will auto-classify the issue type and severity</div>
               </div>

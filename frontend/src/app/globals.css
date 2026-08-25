@@ -5,7 +5,7 @@
   --gov-navy:      #1B3A6B;   /* primary dark blue */
   --gov-navy-dark: #0F2447;   /* darker navy for header */
   --gov-blue:      #2563EB;   /* interactive blue */
-  --gov-saffron:   #F97316;   /* accent amber/orange */
+  --gov-saffron:   #0D9488;   /* accent amber/orange */
   --gov-green:     #166534;   /* success green */
   --gov-red:       #B91C1C;   /* critical red */
   --gov-amber:     #B45309;   /* warning amber */
@@ -130,7 +130,7 @@ body {
   text-align: left;
 }
 .nav-link:hover { background: rgba(255,255,255,0.08); color: white; }
-.nav-link.active { background: rgba(255,255,255,0.12); color: white; border-left-color: #F97316; }
+.nav-link.active { background: rgba(255,255,255,0.12); color: white; border-left-color: #0D9488; }
 
 /* ── Status table ─────────────────────────────────────────────── */
 .gov-table { width: 100%; border-collapse: collapse; font-size: 13px; }

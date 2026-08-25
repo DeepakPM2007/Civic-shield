@@ -21,7 +21,7 @@ const STATIONS = [
 const DISTRICT_COLORS: Record<string, string> = {
   Chennai: "#3b82f6",   // blue
   Madurai: "#a855f7",   // purple
-  Karur:   "#f97316",   // orange
+  Karur:   "#0D9488",   // teal
 };
 
 interface MapProps {

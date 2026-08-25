@@ -12,10 +12,9 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header style={{ background: "#1B3A6B", color: "white", padding: "16px 32px", display: "flex", alignItems: "center", gap: 20, borderBottom: "4px solid #F97316" }}>
-        {/* Emblem placeholder */}
+      <header style={{ background: "#1B3A6B", color: "white", padding: "16px 32px", display: "flex", alignItems: "center", gap: 20, borderBottom: "4px solid #0D9488" }}>
         <div style={{ width: 60, height: 60, background: "rgba(255,255,255,0.15)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#fbbf24" }}>shield</span>
+          <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#5EEAD4" }}>shield</span>
         </div>
         <div>
           <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: "-0.3px" }}>CivicShield AI</div>
@@ -33,13 +32,13 @@ export default function Home() {
       {/* Hero section */}
       <div style={{ background: "linear-gradient(135deg, #1B3A6B 0%, #0F2447 60%, #1e3a5f 100%)", padding: "60px 32px", textAlign: "center", color: "white" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,152,0,0.15)", border: "1px solid rgba(255,152,0,0.4)", borderRadius: 20, padding: "4px 16px", fontSize: 12, color: "#ff9a00", marginBottom: 24 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(13,148,136,0.2)", border: "1px solid rgba(94,234,212,0.35)", borderRadius: 20, padding: "4px 16px", fontSize: 12, color: "#5EEAD4", marginBottom: 24 }}>
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>verified</span>
             AI-Verified · Real-time · Geospatial Routing
           </div>
           <h1 style={{ fontSize: 38, fontWeight: 800, margin: "0 0 16px", lineHeight: 1.2 }}>
             Report Civic Issues.<br />
-            <span style={{ color: "#fb923c" }}>AI Routes Them Instantly.</span>
+            <span style={{ color: "#5EEAD4" }}>AI Routes Them Instantly.</span>
           </h1>
           <p style={{ fontSize: 16, color: "#93c5fd", marginBottom: 36, lineHeight: 1.7 }}>
             Snap a photo of a pothole, garbage overflow, water leak, or fallen tree.
@@ -48,7 +47,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/report">
-              <button style={{ background: "#F97316", color: "white", border: "none", padding: "14px 36px", borderRadius: 4, fontSize: 16, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
+              <button style={{ background: "#0D9488", color: "white", border: "none", padding: "14px 36px", borderRadius: 4, fontSize: 16, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
                 <span className="material-symbols-outlined" style={{ fontSize: 20 }}>add_a_photo</span>
                 File a Complaint
               </button>
@@ -75,7 +74,7 @@ export default function Home() {
           {[
             { icon: "psychology", title: "YOLOv8 + Gemini AI", desc: "Hybrid vision + NLP pipeline detects and categorises issues from photos.", color: "#1B3A6B" },
             { icon: "location_on", title: "Geospatial Routing", desc: "Haversine algorithm routes complaints to the nearest of 11 TN stations.", color: "#166534" },
-            { icon: "notifications_active", title: "Instant Alerts", desc: "Automated WhatsApp and Email dispatched to duty officer within seconds.", color: "#F97316" },
+            { icon: "notifications_active", title: "Instant Alerts", desc: "Automated WhatsApp and Email dispatched to duty officer within seconds.", color: "#0D9488" },
             { icon: "bar_chart", title: "Live Dashboard", desc: "Real-time incident feed with district & department filters for officers.", color: "#7C3AED" },
           ].map((f) => (
             <div key={f.title} className="gov-card" style={{ padding: 24 }}>
@@ -95,7 +94,7 @@ export default function Home() {
             {[
               { name: "Chennai", stations: 4, color: "#1D4ED8", bg: "#DBEAFE" },
               { name: "Madurai", stations: 4, color: "#6D28D9", bg: "#EDE9FE" },
-              { name: "Karur",   stations: 3, color: "#92400E", bg: "#FEF3C7" },
+              { name: "Karur",   stations: 3, color: "#0F766E", bg: "#CCFBF1" },
             ].map((d) => (
               <div key={d.name} style={{ background: d.bg, border: `1px solid`, borderColor: d.bg, borderRadius: 6, padding: "12px 20px", display: "flex", alignItems: "center", gap: 10 }}>
                 <span className="material-symbols-outlined" style={{ color: d.color, fontSize: 20 }}>location_city</span>

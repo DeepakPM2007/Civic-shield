@@ -125,7 +125,7 @@ export default function GovernmentDashboard() {
       <aside style={{ width: 240, background: "#0F2447", display: "flex", flexDirection: "column", position: "fixed", top: 0, left: 0, height: "100vh", zIndex: 40 }}>
         <div style={{ padding: "18px 16px 14px", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 36, height: 36, background: "#F97316", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <div style={{ width: 36, height: 36, background: "#0D9488", borderRadius: 6, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               <span className="material-symbols-outlined" style={{ fontSize: 20, color: "white" }}>shield</span>
             </div>
             <div>
@@ -138,7 +138,7 @@ export default function GovernmentDashboard() {
         <nav style={{ flex: 1, padding: "8px 0" }}>
           {navItems.map(item => (
             <button key={item.id} onClick={() => scrollTo(item.id)} className="nav-link"
-              style={activeSection === item.id ? { background: "rgba(255,255,255,0.12)", color: "white", borderLeftColor: "#F97316" } : {}}>
+              style={activeSection === item.id ? { background: "rgba(255,255,255,0.12)", color: "white", borderLeftColor: "#0D9488" } : {}}>
               <span className="material-symbols-outlined" style={{ fontSize: 18 }}>{item.icon}</span>
               {item.label}
             </button>
@@ -146,7 +146,7 @@ export default function GovernmentDashboard() {
         </nav>
 
         <div style={{ padding: 14, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-          <Link href="/report" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "#F97316", color: "white", padding: "10px 0", borderRadius: 4, fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
+          <Link href="/report" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "#0D9488", color: "white", padding: "10px 0", borderRadius: 4, fontSize: 13, fontWeight: 700, textDecoration: "none" }}>
             <span className="material-symbols-outlined" style={{ fontSize: 16 }}>add</span>
             File New Complaint
           </Link>
@@ -157,7 +157,7 @@ export default function GovernmentDashboard() {
       <main style={{ marginLeft: 240, flex: 1, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
 
         {/* Top bar */}
-        <div style={{ background: "#1B3A6B", padding: "13px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "3px solid #F97316", position: "sticky", top: 0, zIndex: 30 }}>
+        <div style={{ background: "#1B3A6B", padding: "13px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "3px solid #0D9488", position: "sticky", top: 0, zIndex: 30 }}>
           <div>
             <div style={{ fontSize: 16, fontWeight: 700, color: "white" }}>Live Operations Dashboard</div>
             <div style={{ fontSize: 11, color: "#93c5fd" }}>Tamil Nadu Urban Local Bodies — Incident Management</div>
@@ -205,7 +205,7 @@ export default function GovernmentDashboard() {
             <div className="gov-section-title" style={{ display: "flex", alignItems: "center", gap: 16 }}>
               Station Map — Tamil Nadu
               <div style={{ display: "flex", gap: 12, fontSize: 11, fontWeight: 400, color: "#64748B" }}>
-                {[["#3B82F6","Chennai"],["#8B5CF6","Madurai"],["#F97316","Karur"],["#EF4444","Report"]].map(([c,l]) => (
+                {[["#3B82F6","Chennai"],["#8B5CF6","Madurai"],["#0D9488","Karur"],["#EF4444","Report"]].map(([c,l]) => (
                   <span key={l} style={{ display: "flex", alignItems: "center", gap: 4 }}>
                     <span style={{ width: 8, height: 8, background: c, borderRadius: "50%", display: "inline-block" }}></span>{l}
                   </span>
@@ -244,9 +244,9 @@ export default function GovernmentDashboard() {
                 <button key={dept} onClick={() => setActiveDept(dept)} style={{
                   padding: "3px 12px", borderRadius: 20, fontSize: 11, fontWeight: 600, cursor: "pointer",
                   border: "1px solid", transition: "all 0.15s",
-                  background: activeDept === dept ? "#F97316" : "#F8FAFC",
+                  background: activeDept === dept ? "#0D9488" : "#F8FAFC",
                   color: activeDept === dept ? "white" : "#64748B",
-                  borderColor: activeDept === dept ? "#F97316" : "#E2E8F0",
+                  borderColor: activeDept === dept ? "#0D9488" : "#E2E8F0",
                 }}>{dept}</button>
               ))}
             </div>
