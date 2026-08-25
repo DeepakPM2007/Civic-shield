@@ -12,7 +12,7 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header style={{ background: "#1B3A6B", color: "white", padding: "16px 32px", display: "flex", alignItems: "center", gap: 20, borderBottom: "4px solid #E65100" }}>
+      <header style={{ background: "#1B3A6B", color: "white", padding: "16px 32px", display: "flex", alignItems: "center", gap: 20, borderBottom: "4px solid #F97316" }}>
         {/* Emblem placeholder */}
         <div style={{ width: 60, height: 60, background: "rgba(255,255,255,0.15)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
           <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#fbbf24" }}>shield</span>
@@ -33,7 +33,7 @@ export default function Home() {
       {/* Hero section */}
       <div style={{ background: "linear-gradient(135deg, #1B3A6B 0%, #0F2447 60%, #1e3a5f 100%)", padding: "60px 32px", textAlign: "center", color: "white" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(230,81,0,0.2)", border: "1px solid rgba(230,81,0,0.4)", borderRadius: 20, padding: "4px 16px", fontSize: 12, color: "#fb923c", marginBottom: 24 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,152,0,0.15)", border: "1px solid rgba(255,152,0,0.4)", borderRadius: 20, padding: "4px 16px", fontSize: 12, color: "#ff9a00", marginBottom: 24 }}>
             <span className="material-symbols-outlined" style={{ fontSize: 14 }}>verified</span>
             AI-Verified · Real-time · Geospatial Routing
           </div>
@@ -48,7 +48,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/report">
-              <button style={{ background: "#E65100", color: "white", border: "none", padding: "14px 36px", borderRadius: 4, fontSize: 16, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
+              <button style={{ background: "#F97316", color: "white", border: "none", padding: "14px 36px", borderRadius: 4, fontSize: 16, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
                 <span className="material-symbols-outlined" style={{ fontSize: 20 }}>add_a_photo</span>
                 File a Complaint
               </button>
@@ -75,7 +75,7 @@ export default function Home() {
           {[
             { icon: "psychology", title: "YOLOv8 + Gemini AI", desc: "Hybrid vision + NLP pipeline detects and categorises issues from photos.", color: "#1B3A6B" },
             { icon: "location_on", title: "Geospatial Routing", desc: "Haversine algorithm routes complaints to the nearest of 11 TN stations.", color: "#166534" },
-            { icon: "notifications_active", title: "Instant Alerts", desc: "Automated WhatsApp and Email dispatched to duty officer within seconds.", color: "#E65100" },
+            { icon: "notifications_active", title: "Instant Alerts", desc: "Automated WhatsApp and Email dispatched to duty officer within seconds.", color: "#F97316" },
             { icon: "bar_chart", title: "Live Dashboard", desc: "Real-time incident feed with district & department filters for officers.", color: "#7C3AED" },
           ].map((f) => (
             <div key={f.title} className="gov-card" style={{ padding: 24 }}>

@@ -43,6 +43,12 @@ export default function CivicMap({ reportLat, reportLng, nearestStation }: MapPr
       mapInstanceRef.current = null;
     }
 
+    // Also clear any orphaned Leaflet state on the DOM node itself
+    const container = mapRef.current as any;
+    if (container._leaflet_id) {
+      delete container._leaflet_id;
+    }
+
     // Inject Leaflet CSS once
     if (!document.getElementById("leaflet-css")) {
       const link = document.createElement("link");
@@ -54,6 +60,9 @@ export default function CivicMap({ reportLat, reportLng, nearestStation }: MapPr
 
     import("leaflet").then((L) => {
       if (!mapRef.current) return;
+
+      // Guard: if another effect already initialized a map on this node, bail out
+      if ((mapRef.current as any)._leaflet_id && mapInstanceRef.current) return;
 
       // Fix broken default icons from webpack
       delete (L.Icon.Default.prototype as any)._getIconUrl;
