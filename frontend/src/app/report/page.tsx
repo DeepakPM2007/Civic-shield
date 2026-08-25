@@ -92,6 +92,7 @@ export default function ReportIssue() {
         priority: data.priority,
         department: data.department,
         submitted_at: data.submitted_at,
+        submitted_timestamp: new Date().toISOString(),   // raw ISO for relative time
         yolo_confidence: data.yolo_confidence,
         nearest_station: data.nearest_station,
         lat: location.lat,

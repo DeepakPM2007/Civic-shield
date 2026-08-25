@@ -1,8 +1,21 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
+
+// ── Relative time helper (refreshes every 30 s via tick) ──────────────────────
+function getRelativeTime(isoString: string | undefined): string {
+  if (!isoString) return "just now";
+  const diffSec = Math.floor((Date.now() - new Date(isoString).getTime()) / 1000);
+  if (diffSec < 10)  return "just now";
+  if (diffSec < 60)  return `${diffSec}s ago`;
+  const diffMin = Math.floor(diffSec / 60);
+  if (diffMin < 60)  return `${diffMin} min ago`;
+  const diffHr = Math.floor(diffMin / 60);
+  if (diffHr  < 24)  return `${diffHr}h ago`;
+  return `${Math.floor(diffHr / 24)}d ago`;
+}
 
 const CivicMap = dynamic(() => import('../components/CivicMap'), {
   ssr: false,
@@ -25,14 +38,22 @@ type District = "All" | "Chennai" | "Madurai" | "Karur";
 
 const DISTRICTS: District[] = ["All", "Chennai", "Madurai", "Karur"];
 
+// Departments per district (for sub-filter)
+const DEPT_BY_DISTRICT: Record<District, string[]> = {
+  All:     ["All Departments", "Public Works", "Sanitation", "Transportation", "Parks & Recreation", "Electricity Dept."],
+  Chennai: ["All Departments", "Public Works", "Transportation", "Parks & Recreation", "Sanitation"],
+  Madurai: ["All Departments", "Public Works", "Sanitation", "Parks & Recreation"],
+  Karur:   ["All Departments", "Public Works", "Sanitation", "Electricity Dept."],
+};
+
 // Sample feed data per district
 const SAMPLE_FEED = [
-  { score: 98, time: "2m ago", title: "Major Water Main Break", dept: "Public Works", icon: "plumbing", district: "Chennai", priority: "critical" },
-  { score: 74, time: "12m ago", title: "Traffic Signal Failure", dept: "Transportation", icon: "traffic", district: "Madurai", priority: "high" },
-  { score: 45, time: "18m ago", title: "Garbage Overflow", dept: "Sanitation", icon: "delete", district: "Karur", priority: "medium" },
-  { score: 68, time: "25m ago", title: "Fallen Tree Blocking Road", dept: "Parks & Recreation", icon: "park", district: "Chennai", priority: "high" },
-  { score: 55, time: "40m ago", title: "Open Manhole Cover", dept: "Public Works", icon: "construction", district: "Madurai", priority: "high" },
-  { score: 30, time: "1h ago", title: "Streetlight Malfunction", dept: "Electricity Dept.", icon: "lightbulb", district: "Karur", priority: "low" },
+  { score: 98, time: "2m ago", isoTime: new Date(Date.now() - 2*60*1000).toISOString(),  title: "Major Water Main Break",    dept: "Public Works",       icon: "plumbing",     district: "Chennai", priority: "critical" },
+  { score: 74, time: "12m ago",isoTime: new Date(Date.now() - 12*60*1000).toISOString(), title: "Traffic Signal Failure",    dept: "Transportation",     icon: "traffic",      district: "Madurai", priority: "high"     },
+  { score: 45, time: "18m ago",isoTime: new Date(Date.now() - 18*60*1000).toISOString(), title: "Garbage Overflow",          dept: "Sanitation",         icon: "delete",       district: "Karur",   priority: "medium"   },
+  { score: 68, time: "25m ago",isoTime: new Date(Date.now() - 25*60*1000).toISOString(), title: "Fallen Tree Blocking Road", dept: "Parks & Recreation", icon: "park",         district: "Chennai", priority: "high"     },
+  { score: 55, time: "40m ago",isoTime: new Date(Date.now() - 40*60*1000).toISOString(), title: "Open Manhole Cover",        dept: "Public Works",       icon: "construction", district: "Madurai", priority: "high"     },
+  { score: 30, time: "1h ago", isoTime: new Date(Date.now() - 60*60*1000).toISOString(), title: "Streetlight Malfunction",   dept: "Electricity Dept.",  icon: "lightbulb",    district: "Karur",   priority: "low"      },
 ];
 
 export default function GovernmentDashboard() {
@@ -40,6 +61,8 @@ export default function GovernmentDashboard() {
   const [liveReport, setLiveReport] = useState<any>(null);
   const [activeSection, setActiveSection] = useState<Section>("dashboard");
   const [activeDistrict, setActiveDistrict] = useState<District>("All");
+  const [activeDept, setActiveDept] = useState("All Departments");
+  const [tick, setTick] = useState(0);   // increments every 30s to re-render relative times
   const router = useRouter();
 
   // Section refs for scroll
@@ -53,8 +76,15 @@ export default function GovernmentDashboard() {
     const timer = setTimeout(() => setLoading(false), 1500);
     const stored = localStorage.getItem("lastReport");
     if (stored) setLiveReport(JSON.parse(stored));
-    return () => clearTimeout(timer);
+    // Tick every 30 s so relative timestamps re-render
+    const ticker = setInterval(() => setTick(t => t + 1), 30_000);
+    return () => { clearTimeout(timer); clearInterval(ticker); };
   }, []);
+
+  // Reset dept filter when district changes
+  useEffect(() => {
+    setActiveDept("All Departments");
+  }, [activeDistrict]);
 
   const scrollTo = (section: Section) => {
     setActiveSection(section);
@@ -89,9 +119,9 @@ export default function GovernmentDashboard() {
     { id: "settings", label: "Settings", icon: "settings" },
   ];
 
-  const filteredFeed = activeDistrict === "All"
-    ? SAMPLE_FEED
-    : SAMPLE_FEED.filter((item) => item.district === activeDistrict);
+  const filteredFeed = SAMPLE_FEED
+    .filter(item => activeDistrict === "All" || item.district === activeDistrict)
+    .filter(item => activeDept === "All Departments" || item.dept === activeDept);
 
   return (
     <>
@@ -221,9 +251,28 @@ export default function GovernmentDashboard() {
             ))}
           </div>
 
+          {/* Department sub-filter — shown under the active district */}
+          <div className="flex gap-2 mb-4 flex-wrap">
+            {DEPT_BY_DISTRICT[activeDistrict].map((dept) => (
+              <button
+                key={dept}
+                onClick={() => setActiveDept(dept)}
+                className={`px-3 py-1 rounded-lg text-xs font-medium border transition-all ${
+                  activeDept === dept
+                    ? "bg-purple-700 border-purple-500 text-white"
+                    : "border-white/5 text-gray-500 hover:border-white/15 hover:text-gray-300"
+                }`}
+              >
+                {dept}
+              </button>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Live submitted report */}
-            {liveReport && (activeDistrict === "All" || liveReport.nearest_station?.includes(activeDistrict)) && (
+            {liveReport &&
+              (activeDistrict === "All" || liveReport.nearest_station?.includes(activeDistrict)) &&
+              (activeDept === "All Departments" || liveReport.department === activeDept) && (
               <div className={`bg-white/5 border rounded-xl p-4 ring-1 ring-blue-500/50 ${priorityBorderColor[liveReport.priority] || "border-white/10"}`}>
                 <div className="flex justify-between items-start mb-2">
                   <span className={`text-xs px-2 py-0.5 rounded border font-mono ${priorityBadgeColor[liveReport.priority] || "bg-white/10 text-white border-white/10"}`}>
@@ -236,9 +285,14 @@ export default function GovernmentDashboard() {
                 {liveReport.yolo_confidence > 0 && (
                   <p className="text-purple-400 text-xs">{liveReport.yolo_confidence}% AI confidence</p>
                 )}
-                <div className="mt-2 text-[10px] text-green-400 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-                  Just submitted — Alerts dispatched
+                <div className="mt-2 flex items-center justify-between">
+                  <div className="text-[10px] text-green-400 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                    Alerts dispatched
+                  </div>
+                  <span className="text-[10px] text-gray-500">
+                    {getRelativeTime(liveReport.submitted_timestamp)}
+                  </span>
                 </div>
               </div>
             )}
@@ -250,7 +304,7 @@ export default function GovernmentDashboard() {
                   <span className={`text-xs px-2 py-0.5 rounded border ${priorityBadgeColor[item.priority] || "bg-white/10 text-white border-white/10"}`}>
                     AI Score: {item.score}
                   </span>
-                  <span className="text-xs text-gray-500">{item.time}</span>
+                  <span className="text-xs text-gray-500">{getRelativeTime(item.isoTime)}</span>
                 </div>
                 <h4 className="font-semibold text-white mb-1">{item.title}</h4>
                 <div className="flex items-center justify-between text-xs text-gray-400">
