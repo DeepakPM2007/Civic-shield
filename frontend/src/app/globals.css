@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon-blue: #3B82F6;
+  --color-electric-purple: #8B5CF6;
+  --color-dark-bg: #0F172A;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: white;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 15px var(--color-neon-blue);
+  transition: all 0.3s ease;
+}
