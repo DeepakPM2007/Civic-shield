@@ -28,17 +28,32 @@ export default function ReportIssue() {
       return;
     }
     setGpsStatus("requesting");
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
-        setGpsStatus("granted");
-      },
-      (error) => {
-        console.error("GPS error:", error);
+
+    const onSuccess = (position: GeolocationPosition) => {
+      setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
+      setGpsStatus("granted");
+    };
+
+    const onError = (error: GeolocationPositionError) => {
+      if (error.code === 1) {
+        // PERMISSION_DENIED — user explicitly blocked it
         setGpsStatus("denied");
-      },
-      { enableHighAccuracy: true, timeout: 15000 }
-    );
+      } else {
+        // POSITION_UNAVAILABLE (2) or TIMEOUT (3) — GPS hardware not available
+        // Fall back to network-based location (WiFi/IP) which works on desktops
+        navigator.geolocation.getCurrentPosition(
+          onSuccess,
+          () => setGpsStatus("denied"),
+          { enableHighAccuracy: false, timeout: 10000 }
+        );
+      }
+    };
+
+    // First try high-accuracy GPS (works on phones with GPS chip)
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+      enableHighAccuracy: true,
+      timeout: 8000,
+    });
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

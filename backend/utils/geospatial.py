@@ -1,15 +1,21 @@
 import math
 
-# Municipal stations across Tamil Nadu - Chennai & Madurai
+# Municipal stations across Tamil Nadu - Chennai, Madurai & Karur districts
 STATIONS = [
-    {"name": "Chennai Central Control Room, Park Town", "lat": 13.0827, "lng": 80.2707},
-    {"name": "Chennai North Zone Corporation, Tondiarpet", "lat": 13.1270, "lng": 80.2900},
-    {"name": "Chennai South Zone Corporation, Adyar", "lat": 13.0012, "lng": 80.2565},
-    {"name": "Chennai West Zone Public Works, Ashok Nagar", "lat": 13.0350, "lng": 80.2100},
-    {"name": "Madurai Central Dispatch, Anna Nagar", "lat": 9.9252, "lng": 78.1198},
-    {"name": "Madurai North Zone Corporation, Arappalayam", "lat": 9.9600, "lng": 78.1100},
-    {"name": "Madurai South Zone Sanitation Hub, Kappalur", "lat": 9.8700, "lng": 78.0900},
-    {"name": "Madurai Emergency Services, Goripalayam", "lat": 9.9100, "lng": 78.1300}
+    # Chennai District
+    {"name": "Chennai Central Control Room, Park Town", "lat": 13.0827, "lng": 80.2707, "district": "Chennai"},
+    {"name": "Chennai North Zone Corporation, Tondiarpet", "lat": 13.1270, "lng": 80.2900, "district": "Chennai"},
+    {"name": "Chennai South Zone Corporation, Adyar", "lat": 13.0012, "lng": 80.2565, "district": "Chennai"},
+    {"name": "Chennai West Zone Public Works, Ashok Nagar", "lat": 13.0350, "lng": 80.2100, "district": "Chennai"},
+    # Madurai District
+    {"name": "Madurai Central Dispatch, Anna Nagar", "lat": 9.9252, "lng": 78.1198, "district": "Madurai"},
+    {"name": "Madurai North Zone Corporation, Arappalayam", "lat": 9.9600, "lng": 78.1100, "district": "Madurai"},
+    {"name": "Madurai South Zone Sanitation Hub, Kappalur", "lat": 9.8700, "lng": 78.0900, "district": "Madurai"},
+    {"name": "Madurai Emergency Services, Goripalayam", "lat": 9.9100, "lng": 78.1300, "district": "Madurai"},
+    # Karur District
+    {"name": "Karur Central Control Room, Karur Town", "lat": 10.9601, "lng": 78.0766, "district": "Karur"},
+    {"name": "Karur North Zone Office, Kulithalai", "lat": 10.9344, "lng": 78.4173, "district": "Karur"},
+    {"name": "Karur South Zone Public Works, Aravakurichi", "lat": 10.7833, "lng": 77.9833, "district": "Karur"},
 ]
 
 def get_nearest_station(user_lat: float, user_lng: float):
